@@ -1,4 +1,4 @@
-module github.com/pomerium/autocache
+module github.com/jsymm/autocache
 
 go 1.13
 
@@ -12,8 +12,9 @@ require (
 	github.com/hashicorp/go-sockaddr v1.0.2 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/memberlist v0.2.2
+	github.com/mailgun/groupcache v1.3.0
 	github.com/miekg/dns v1.1.27 // indirect
-	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad // indirect
+	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad
 	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa // indirect
 	golang.org/x/sys v0.0.0-20200117145432-59e60aa80a0c // indirect
 )

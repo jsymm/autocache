@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/golang/groupcache"
-	"github.com/pomerium/autocache"
+	"github.com/jsymm/autocache"
+	"github.com/mailgun/groupcache"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -53,7 +52,7 @@ type cache struct {
 // Get is am arbitrary getter function. Bcrypt is nice here because, it:
 //	1) takes a long time
 //	2) uses a random seed so non-cache results for the same key are obvious
-func (ac cache) Get(ctx context.Context, key string, dst groupcache.Sink) error {
+func (ac cache) Get(ctx groupcache.Context, key string, dst groupcache.Sink) error {
 	now := time.Now()
 	defer func() {
 		log.Printf("bcryptKey/key:%q\ttime:%v", key, time.Since(now))
@@ -62,7 +61,7 @@ func (ac cache) Get(ctx context.Context, key string, dst groupcache.Sink) error 
 	if err != nil {
 		return err
 	}
-	if err := dst.SetBytes(out); err != nil {
+	if err := dst.SetBytes(out, time.Now().Add(time.Minute*5)); err != nil {
 		return err
 	}
 	return nil
